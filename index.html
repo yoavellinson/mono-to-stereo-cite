@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Audio Samples – Mossformer2 vs Mono-to-Stereo</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #fafafa;
+        }
+
+        audio {
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .06);
+            padding: 1rem;
+        }
+
+        .tag {
+            font-size: .75rem;
+            padding: .15rem .45rem;
+            border-radius: .375rem;
+            background: #eef2ff;
+            color: #3730a3;
+        }
+    </style>
+</head>
+
+<body class="text-gray-800">
+    <div class="max-w-5xl mx-auto p-6">
+        <header class="mb-8 text-center">
+            <h1 class="text-3xl font-bold mb-2">🎧 Mono-to-Stereo Speech Separation - Audio Samples</h1>
+        </header>
+
+        <!-- Common references -->
+        <section class="mb-10">
+            <h2 class="text-2xl font-semibold mb-4">Common References</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="card">
+                    <div class="flex items-center justify-between">
+                        <p class="font-medium">Mix</p>
+                        <span class="tag">reference</span>
+                    </div>
+                    <audio controls src="audio/mix_0_2550.wav"></audio>
+                    <a class="text-sm text-blue-700 underline" href="audio/mix_0_2550.wav"></a>
+                </div>
+                <div class="card">
+                    <div class="flex items-center justify-between">
+                        <p class="font-medium">GT Speaker 1</p>
+                        <span class="tag">ground truth</span>
+                    </div>
+                    <audio controls src="audio/gt1_0_2550.wav"></audio>
+                    <a class="text-sm text-blue-700 underline" href="audio/gt1_0_2550.wav"></a>
+                </div>
+                <div class="card">
+                    <div class="flex items-center justify-between">
+                        <p class="font-medium">GT Speaker 2</p>
+                        <span class="tag">ground truth</span>
+                    </div>
+                    <audio controls src="audio/gt2_0_2550.wav"></audio>
+                    <a class="text-sm text-blue-700 underline" href="audio/gt2_0_2550.wav"></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mossformer2 -->
+        <section class="mb-10">
+            <h2 class="text-2xl font-semibold mb-4">Mossformer2</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="card">
+                    <p class="font-medium">s1_hat </p>
+                    <audio controls src="audio/s1_hat_0_sisdr_1.917.wav"></audio>
+                    <a class="text-sm text-blue-700 underline" href="audio/s1_hat_0_sisdr_1.917.wav"></a>
+                </div>
+                <div class="card">
+                    <p class="font-medium">s2_hat</p>
+                    <audio controls src="audio/s2_hat_0_sisdr_18.636.wav"></audio>
+                    <a class="text-sm text-blue-700 underline" href="audio/s2_hat_0_sisdr_18.636.wav"></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mono-to-Stereo -->
+        <section>
+            <h2 class="text-2xl font-semibold mb-4">Mono-to-Stereo (Proposed)</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="card">
+                    <p class="font-medium">Stereo Gen</p>
+                    <audio controls src="audio/sample0_2550_stereo_gen.wav"></audio>
+                    <a class="text-sm text-blue-700 underline" href="audio/sample0_2550_stereo_gen.wav"></a>
+                </div>
+                <div class="card">
+                    <p class="font-medium">LCMV left</p>
+                    <audio controls src="audio/samples1_0_2550_lcmv.wav"></audio>
+                    <a class="text-sm text-blue-700 underline" href="audio/samples1_0_2550_lcmv.wav"></a>
+                </div>
+                <div class="card">
+                    <p class="font-medium">LCMV right</p>
+                    <audio controls src="audio/samples2_0_2550_lcmv.wav"></audio>
+                    <a class="text-sm text-blue-700 underline" href="audio/samples2_0_2550_lcmv.wav"></a>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center text-gray-500 mt-12 text-sm">
+            © 2025 Yoav Ellinson — Research demo page
+        </footer>
+    </div>
+
+    <script>
+        // Pause other players when one starts
+        document.querySelectorAll("audio").forEach(a => {
+            a.addEventListener("play", () => {
+                document.querySelectorAll("audio").forEach(b => { if (b !== a) b.pause(); });
+            });
+        });
+    </script>
+</body>
+
+</html>
